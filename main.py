@@ -11,12 +11,22 @@ from audiobook_generator.tts_providers.base_tts_provider import (
 def handle_args(input, output):
     parser = argparse.ArgumentParser(description="Convert text book to audiobook")
     parser.add_argument(
-        "input_file",
+        "run",
+        default=None,
+        help="Ignore flask arguments"
+    )
+    parser.add_argument(
+        "--host=0.0.0.0",
+        default=None,
+        help="Ignore flask arguments"
+    )
+    parser.add_argument(
+        "--input_file",
         default=input,
         help="Path to the EPUB file"
     )
     parser.add_argument(
-        "output_folder",
+        "--output_folder",
         default=output, 
         help="Path to the output folder"
     )
@@ -40,6 +50,7 @@ def handle_args(input, output):
     parser.add_argument(
         "--no_prompt",
         action="store_true",
+        default="true",
         help="Don't ask the user if they wish to continue after estimating the cloud cost for TTS. Useful for scripting.",
     )
     parser.add_argument(
@@ -186,13 +197,12 @@ def setup_logging(log_level):
     root_logger.addHandler(console_handler)
 
 
-def main(name=None):
-    output_folder = "../audio-books"
-    config = handle_args(name, output_folder)
-    print(config)
+def main(input=None, output_folder=None):
+    
+    config = handle_args(input, output_folder)
     setup_logging(config.log)
 
-    #AudiobookGenerator(config).run()
+    AudiobookGenerator(config).run()
 
 
 if __name__ == "__main__":
