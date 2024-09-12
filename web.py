@@ -1,5 +1,5 @@
 from flask import request, render_template, Flask
-from main import main
+import main
 
 app = Flask(__name__)
 
@@ -12,7 +12,7 @@ def upload_ebook():
     f = request.files['ebook']
     f.save(f.filename)
     try:
-        main(f.filename)
+        main.main(f.filename)
     except:
         return '<script>alert("Upload failed! See terminal for more details.");</script>'
     
