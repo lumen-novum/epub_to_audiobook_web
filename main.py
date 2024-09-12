@@ -16,7 +16,7 @@ def handle_args(input, output):
         help="Ignore flask arguments"
     )
     parser.add_argument(
-        "--host=0.0.0.0",
+        "--host",
         default=None,
         help="Ignore flask arguments"
     )
