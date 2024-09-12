@@ -13,8 +13,5 @@ RUN apt-get update && apt-get install -y ffmpeg
 # Install any needed packages specified in requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Set the working directory to /app
-WORKDIR /app
-
 # Set this as the default command
 ENTRYPOINT [ "flask", "run", "--host=0.0.0.0"]
