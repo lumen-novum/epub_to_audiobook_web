@@ -17,4 +17,4 @@ RUN pip install --no-cache-dir -r requirements.txt
 WORKDIR /app
 
 # Set this as the default command
-ENTRYPOINT [ "python", "/app_src/web.py" ]
+ENTRYPOINT [ "flask", "run", "--host=0.0.0.0"]
