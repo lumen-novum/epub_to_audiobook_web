@@ -8,15 +8,23 @@ from audiobook_generator.tts_providers.base_tts_provider import (
 )
 
 
-def handle_args():
+def handle_args(input, output):
     parser = argparse.ArgumentParser(description="Convert text book to audiobook")
-    parser.add_argument("input_file", help="Path to the EPUB file")
-    parser.add_argument("output_folder", help="Path to the output folder")
+    parser.add_argument(
+        "input_file",
+        default=input,
+        help="Path to the EPUB file"
+    )
+    parser.add_argument(
+        "output_folder",
+        default=output, 
+        help="Path to the output folder"
+    )
     parser.add_argument(
         "--tts",
         choices=get_supported_tts_providers(),
-        default=get_supported_tts_providers()[0],
-        help="Choose TTS provider (default: azure). azure: Azure Cognitive Services, openai: OpenAI TTS API. When using azure, environment variables MS_TTS_KEY and MS_TTS_REGION must be set. When using openai, environment variable OPENAI_API_KEY must be set.",
+        default=get_supported_tts_providers()[2],
+        help="Choose TTS provider (default: edge). azure: Azure Cognitive Services, openai: OpenAI TTS API. When using azure, environment variables MS_TTS_KEY and MS_TTS_REGION must be set. When using openai, environment variable OPENAI_API_KEY must be set.",
     )
     parser.add_argument(
         "--log",
@@ -158,6 +166,7 @@ def handle_args():
     )
 
     args = parser.parse_args()
+    
     return GeneralConfig(args)
 
 
@@ -177,12 +186,13 @@ def setup_logging(log_level):
     root_logger.addHandler(console_handler)
 
 
-def main():
-    config = handle_args()
-
+def main(name=None):
+    output_folder = "../audio-books"
+    config = handle_args(name, output_folder)
+    print(config)
     setup_logging(config.log)
 
-    AudiobookGenerator(config).run()
+    #AudiobookGenerator(config).run()
 
 
 if __name__ == "__main__":
