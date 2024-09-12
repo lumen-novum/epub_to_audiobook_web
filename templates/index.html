@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <head>
-    <title>Upload Ebook</title>
+    <title>Ebook to Audiobook</title>
 </head>
 <html>
     <body>
         <p>Upload Ebook here:</p>
-        <form action="/" enctype="multipart/form-data">
-            <input type="file" name="ebook" accept=".pdf,.epub">
+        <form action="/" enctype="multipart/form-data" method="post">
+            <input type="file" name="ebook" accept=".epub">
             <input type="submit">
         </form>
     </body>
