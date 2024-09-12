@@ -1,5 +1,7 @@
-from flask import request, render_template
+from flask import request, render_template, Flask
 from main import main
+
+app = Flask(__name__)
 
 @app.route('/', methods=['GET'])
 def index():
