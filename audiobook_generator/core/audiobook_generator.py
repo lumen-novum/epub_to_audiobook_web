@@ -94,7 +94,7 @@ class AudiobookGenerator:
                     continue
 
                 output_file = os.path.join(self.config.output_folder,
-                                           f"{idx:04d}_{title}.{tts_provider.get_output_file_extension()}")
+                                           f"Chapter{idx}.{tts_provider.get_output_file_extension()}")
 
                 audio_tags = AudioTags(title, book_parser.get_book_author(), book_parser.get_book_title(), idx)
                 tts_provider.text_to_speech(
